@@ -1,0 +1,279 @@
+
+import { useState } from "react";
+import { artists, artworks } from "../data";
+
+const priceRanges = [
+  { label: "Under €300", min: 0, max: 299 },
+  { label: "€300–€499", min: 300, max: 499 },
+  { label: "€500–€999", min: 500, max: 999 },
+  { label: "€1,000+", min: 1000, max: Infinity },
+];
+
+function FilterGroup({ title, options, selected, onChange }) {
+  return (
+    <div className="filter-group">
+      <h3>{title}</h3>
+      <div>
+        {options.map((option) => {
+          const value =
+            typeof option === "object" ? option.value : String(option);
+          const label =
+            typeof option === "object" ? option.label : String(option);
+
+          return (
+            <label key={value}>
+              <input
+                type="checkbox"
+                value={value}
+                checked={selected.includes(value)}
+                onChange={() => onChange(value)}
+              />
+              {label}
+            </label>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ArtworkCard({ artwork }) {
+  const [isAdded, setIsAdded] = useState(() => {
+    try {
+      const basket = JSON.parse(
+        localStorage.getItem("baso-basket") || "[]"
+      );
+
+      return basket.some((item) => item.id === artwork.id);
+    } catch {
+      return false;
+    }
+  });
+
+  function addToBasket() {
+    try {
+      const basket = JSON.parse(
+        localStorage.getItem("baso-basket") || "[]"
+      );
+
+      const alreadyAdded = basket.some(
+        (item) => item.id === artwork.id
+      );
+
+      if (alreadyAdded) {
+        setIsAdded(true);
+        return;
+      }
+
+      const updatedBasket = [...basket, artwork];
+
+      localStorage.setItem(
+        "baso-basket",
+        JSON.stringify(updatedBasket)
+      );
+
+      setIsAdded(true);
+    } catch (error) {
+      console.error("Could not add artwork to basket:", error);
+    }
+  }
+
+  return (
+    <div className="artwork-card">
+      <img src={artwork.image} alt={artwork.title} loading="lazy" />
+      <h2>{artwork.title}</h2>
+      <p>{artwork.year}</p>
+      <p>{artwork.medium}</p>
+      <p>
+        {artwork.width} × {artwork.height} {artwork.unit}
+      </p>
+      <p>
+        {artwork.price} {artwork.currency}
+      </p>
+
+      <button
+        type="button"
+        className="add-to-basket-btn"
+        onClick={addToBasket}
+        disabled={isAdded}
+      >
+        {isAdded ? "Added to basket" : "Add to basket"}
+      </button>
+    </div>
+  );
+}
+
+function ArtworksPage() {
+  const [selectedFilters, setSelectedFilters] = useState({
+    artists: [],
+    years: [],
+    mediums: [],
+    sizes: [],
+    prices: [],
+  });
+
+  const years = [
+    ...new Set(artworks.map((artwork) => String(artwork.year))),
+  ];
+
+  const mediums = [
+    ...new Set(artworks.map((artwork) => artwork.medium)),
+  ];
+
+  const sizes = [
+    ...new Set(
+      artworks.map(
+        (artwork) =>
+          `${artwork.width} × ${artwork.height} ${artwork.unit}`
+      )
+    ),
+  ];
+
+  function toggleFilter(category, value) {
+    setSelectedFilters((previous) => {
+      const current = previous[category];
+
+      const updated = current.includes(value)
+        ? current.filter((item) => item !== value)
+        : [...current, value];
+
+      return { ...previous, [category]: updated };
+    });
+  }
+
+  const filteredArtworks = artworks.filter((artwork) => {
+    const artistMatch =
+      selectedFilters.artists.length === 0 ||
+      selectedFilters.artists.includes(String(artwork.artistId));
+
+    const yearMatch =
+      selectedFilters.years.length === 0 ||
+      selectedFilters.years.includes(String(artwork.year));
+
+    const mediumMatch =
+      selectedFilters.mediums.length === 0 ||
+      selectedFilters.mediums.includes(artwork.medium);
+
+    const size = `${artwork.width} × ${artwork.height} ${artwork.unit}`;
+
+    const sizeMatch =
+      selectedFilters.sizes.length === 0 ||
+      selectedFilters.sizes.includes(size);
+
+    const priceMatch =
+      selectedFilters.prices.length === 0 ||
+      selectedFilters.prices.some((selectedPrice) => {
+        const range = priceRanges.find(
+          (item) => item.label === selectedPrice
+        );
+
+        return (
+          range &&
+          artwork.price >= range.min &&
+          artwork.price <= range.max
+        );
+      });
+
+    return (
+      artistMatch &&
+      yearMatch &&
+      mediumMatch &&
+      sizeMatch &&
+      priceMatch
+    );
+  });
+
+  const columns = [[], [], []];
+
+  filteredArtworks.forEach((artwork, index) => {
+    columns[index % 3].push(artwork);
+  });
+
+  return (
+    <main>
+      <section className="hero-artworks" id="artworks">
+        <div className="hero-media">
+          <img
+            src="/images/artwork-hero-image.png"
+            alt="A minimalist gallery space with an abstract painting on display"
+          />
+        </div>
+
+        <div className="hero-content">
+          <div className="container">
+            <h1>Artworks</h1>
+            <p>
+              Discover a curated selection of contemporary artworks
+              from talented artists.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="gallery-layout">
+        <aside className="filters">
+          <FilterGroup
+            title="Artist"
+            options={artists.map((artist) => ({
+              value: String(artist.id),
+              label: artist.name,
+            }))}
+            selected={selectedFilters.artists}
+            onChange={(value) => toggleFilter("artists", value)}
+          />
+
+          <FilterGroup
+            title="Year"
+            options={years}
+            selected={selectedFilters.years}
+            onChange={(value) => toggleFilter("years", value)}
+          />
+
+          <FilterGroup
+            title="Medium"
+            options={mediums}
+            selected={selectedFilters.mediums}
+            onChange={(value) => toggleFilter("mediums", value)}
+          />
+
+          <FilterGroup
+            title="Size"
+            options={sizes}
+            selected={selectedFilters.sizes}
+            onChange={(value) => toggleFilter("sizes", value)}
+          />
+
+          <FilterGroup
+            title="Price"
+            options={priceRanges}
+            selected={selectedFilters.prices}
+            onChange={(value) => toggleFilter("prices", value)}
+          />
+        </aside>
+
+        <section className="artworks-area">
+          <div id="artworks-container">
+            {columns.map((column, index) => (
+              <div className="artworks-column" key={index}>
+                {column.map((artwork) => (
+                  <ArtworkCard
+                    artwork={artwork}
+                    key={artwork.id}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {filteredArtworks.length === 0 && (
+            <p className="no-artworks">
+              No artworks match your selected filters.
+            </p>
+          )}
+        </section>
+      </div>
+    </main>
+  );
+}
+
+export default ArtworksPage;

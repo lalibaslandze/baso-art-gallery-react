@@ -1,0 +1,43 @@
+
+:root {
+  /* Colours */
+  --cream: #F5F1E9;
+  --cream-dark: #EDE7DA;
+  --ink: #1C1B19;
+  --ink-soft: #4A4741;
+  --line: #DDD5C5;
+  --clay: #B5652E;
+  --gold: #C79A4B;
+  --page-background: #F7F5F0;
+  --card-background: #FAF9F6;
+
+  /* Layout */
+  --container: 1390px;
+  --page-padding: clamp(20px, 3vw, 40px);
+  --section-gap: clamp(40px, 6vw, 90px);
+  --gap: clamp(16px, 2vw, 30px);
+  --header-height: clamp(60px, 5vw, 70px);
+
+  /* Typography */
+  --font-xs: clamp(0.7rem, 0.75vw, 0.8rem);
+  --font-sm: clamp(0.8rem, 0.9vw, 0.95rem);
+  --font-md: clamp(0.9rem, 1vw, 1.1rem);
+  --font-lg: clamp(1.15rem, 1.6vw, 1.5rem);
+  --font-xl: clamp(1.8rem, 3vw, 2.6rem);
+  --font-hero: clamp(1.8rem, 3vw, 2.6rem);
+
+  /* Line heights */
+  --line-tight: 1;
+  --line-normal: 1.4;
+  --line-relaxed: 1.6;
+
+  /* Letter spacing */
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+
+  /* Effects */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.10);
+}

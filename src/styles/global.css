@@ -1,0 +1,163 @@
+
+/* ========================================
+   GLOBAL RESET
+   ======================================== */
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-top: var(--header-height);
+  background: var(--page-background);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--font-md);
+  line-height: var(--line-normal);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-xl);
+  font-weight: 400;
+  line-height: var(--line-tight);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+/* Shared buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.btn-dark:hover {
+  background: #000;
+}
+
+.btn-outline {
+  border-color: var(--gold);
+  background: transparent;
+  color: var(--cream);
+}
+
+.btn-outline:hover {
+  background: rgba(199, 154, 75, 0.15);
+}
+
+.btn-outline-light {
+  width: fit-content;
+  border-color: var(--gold);
+  background: transparent;
+  color: var(--cream);
+}
+
+.btn-outline-light:hover {
+  background: rgba(199, 154, 75, 0.15);
+}
+
+.btn:active {
+  transform: translateY(2px);
+}
+
+/* Shared page headings */
+
+.page-title {
+  max-width: 1400px;
+  margin: clamp(20px, 3vw, 30px) auto clamp(30px, 4vw, 50px);
+  padding-inline: var(--page-padding);
+  font-size: var(--font-xl);
+  font-weight: 400;
+  line-height: var(--line-tight);
+}

@@ -1,0 +1,300 @@
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+
+/* ========================================
+   TABLET: 900px AND BELOW
+   ======================================== */
+
+@media (max-width: 900px) {
+
+  /* HEADER */
+
+  .header-inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .header-actions {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    padding: 12px 0 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .main-nav.is-open {
+    display: flex;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 12px 0;
+    line-height: 1.4;
+  }
+
+
+  /* FOOTER */
+
+  .footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* ARTWORKS */
+
+  .gallery-layout {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  #artworks-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* HOME PAGE */
+
+  #featured-artworks-container,
+  .featured-artworks-grid,
+  #featured-artists-container,
+  .featured-artists-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* ARTISTS */
+
+  .artists-grid,
+  #artists-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* ========================================
+   MOBILE: 650px AND BELOW
+   ======================================== */
+
+@media (max-width: 650px) {
+
+  :root {
+    --page-padding: 16px;
+    --gap: 16px;
+  }
+
+
+  /* HERO */
+
+  .hero {
+    height: calc(100svh - var(--header-height));
+  }
+
+  .hero-artworks,
+  .hero-about {
+    height: calc((100svh - var(--header-height)) / 2);
+  }
+
+  .hero-content {
+    padding-inline: var(--page-padding);
+  }
+
+
+  /* ARTWORKS */
+
+  .gallery-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-block: 24px;
+  }
+
+  .filters {
+    padding: 0 0 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .filter-group {
+    margin-top: 20px;
+  }
+
+  #artworks-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .artworks-column {
+    gap: 20px;
+  }
+
+
+  /* HOME PAGE */
+
+  .featured-artworks .section-header,
+  .featured-artists .section-header {
+    margin-bottom: 24px;
+  }
+
+  #featured-artworks-container,
+  .featured-artworks-grid,
+  #featured-artists-container,
+  .featured-artists-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* ARTISTS */
+
+  .artists-area {
+    margin-block: 24px;
+    padding-bottom: 40px;
+  }
+
+  .artists-grid,
+  #artists-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* CONTACT PAGE */
+
+  .contact-section {
+    padding-block: 55px;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+    row-gap: 55px;
+    width: 100%;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .contact-information {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .contact-item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .contact-form-wrapper {
+    width: 100%;
+  }
+
+  .contact-form-wrapper h2 {
+    margin-bottom: 28px;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+
+
+  /* FOOTER */
+
+  .footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+}
+
+
+/* ========================================
+   SMALL MOBILE: 480px AND BELOW
+   ======================================== */
+
+@media (max-width: 480px) {
+
+
+  /* ARTISTS */
+
+  .artists-grid,
+  #artists-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+
+  /* HERO TEXT */
+
+  .hero-content h1 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+
+  /* CONTACT PAGE */
+
+  .contact-section {
+    padding-block: 45px;
+  }
+
+  .contact-layout {
+    row-gap: 45px;
+  }
+
+  .contact-information {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .contact-item:last-child {
+    grid-column: auto;
+  }
+
+  .contact-form {
+    gap: 24px;
+  }
+
+  .contact-form .btn {
+    width: 100%;
+  }
+}
+
+
+/* ========================================
+   EXTRA SMALL: 380px AND BELOW
+   ======================================== */
+
+@media (max-width: 380px) {
+
+  #artworks-container,
+  #featured-artworks-container,
+  .featured-artworks-grid,
+  #featured-artists-container,
+  .featured-artists-grid,
+  .artists-grid,
+  #artists-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .featured-artworks .section-header,
+  .featured-artists .section-header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .featured-artworks .view-all,
+  .featured-artists .view-all,
+  .featured-artworks .view-all-link,
+  .featured-artists .view-all-link {
+    margin-left: 0;
+  }
+}

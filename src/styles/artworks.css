@@ -1,0 +1,119 @@
+
+/* ========================================
+   ARTWORKS PAGE
+   ======================================== */
+
+/* Gallery layout */
+
+.gallery-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 50px);
+  width: 100%;
+  max-width: var(--container);
+  margin: clamp(24px, 2.5vw, 35px) auto;
+  padding-inline: var(--page-padding);
+}
+
+/* Filter sidebar */
+
+.filters {
+  min-width: 0;
+  padding-right: 25px;
+  border-right: 1px solid var(--line);
+}
+
+.filter-group {
+  margin-top: clamp(24px, 2.5vw, 35px);
+}
+
+.filter-group h3 {
+  margin: 0 0 clamp(10px, 1.2vw, 15px);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  line-height: var(--line-normal);
+  text-transform: uppercase;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: var(--font-sm);
+  line-height: var(--line-normal);
+  cursor: pointer;
+}
+
+.filter-group input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Artwork grid */
+
+#artworks-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--gap);
+  min-width: 0;
+}
+
+/* Supports column-based gallery layouts */
+
+.artworks-column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+}
+
+/* Artwork cards */
+
+.artwork-card {
+  width: 100%;
+  min-width: 0;
+  padding: clamp(12px, 1.3vw, 18px);
+  border: 1px solid var(--line);
+  background: var(--card-background);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.artwork-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+}
+
+.artwork-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.artwork-card h2 {
+  margin: clamp(14px, 1.5vw, 18px) 0 8px;
+  font-size: var(--font-lg);
+  font-weight: 400;
+  line-height: var(--line-tight);
+}
+
+.artwork-card p {
+  margin: 4px 0;
+  color: #666;
+  font-size: var(--font-xs);
+  line-height: var(--line-normal);
+}
+
+.artwork-card p:last-child {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: var(--font-sm);
+}
