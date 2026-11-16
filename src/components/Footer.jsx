@@ -1,4 +1,9 @@
+
+import useLanguage from "../useLanguage";
+
 function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
@@ -9,25 +14,24 @@ function Footer() {
         </div>
 
         <div className="footer-column">
-          <h3>Explore</h3>
-          <a href="/">Home</a>
-          <a href="/artists.html">Artists</a>
-          <a href="/artworks.html">Artworks</a>
-          <a href="/about.html">About Us</a>
-          <a href="/contact.html">Contact</a>
+          <h3>{t.explore}</h3>
+          <a href="/">{t.home}</a>
+          <a href="/artists.html">{t.artists}</a>
+          <a href="/artworks.html">{t.artworks}</a>
+          <a href="/about.html">{t.about}</a>
+          <a href="/contact.html">{t.contact}</a>
         </div>
 
         <div className="footer-column">
-          <h3>Contact</h3>
+          <h3>{t.contact}</h3>
           <a href="mailto:l.baslandze@gmail.com">
             l.baslandze@gmail.com
           </a>
-          <a href="tel:+995000000000">+995 000 000 000</a>
-          <p>Tbilisi, Georgia</p>
+          <a href="tel:+995593749050">+995 593 749 050</a>
         </div>
 
         <div className="footer-column">
-          <h3>Follow</h3>
+          <h3>{t.follow}</h3>
           <a
             href="https://www.instagram.com/l.baslandze"
             target="_blank"
@@ -47,7 +51,7 @@ function Footer() {
 
       <div className="footer-bottom">
         <div className="container">
-          <p>© 2026 BASO Art Gallery. All rights reserved.</p>
+          <p>© 2026 BASO Art Gallery. {t.allRightsReserved}</p>
         </div>
       </div>
     </footer>

@@ -6,13 +6,16 @@ import ArtworksPage from "./pages/Artworks";
 import ArtistsPage from "./pages/Artists";
 import AboutPage from "./pages/About";
 import ContactPage from "./pages/Contact";
+import BasketPage from "./pages/Basket";
 
 function App() {
   const currentPath = window.location.pathname;
 
   let currentPage;
 
-  if (currentPath.endsWith("/artworks.html")) {
+  if (currentPath.endsWith("/basket.html")) {
+    currentPage = <BasketPage />;
+  } else if (currentPath.endsWith("/artworks.html")) {
     currentPage = <ArtworksPage />;
   } else if (currentPath.endsWith("/artists.html")) {
     currentPage = <ArtistsPage />;

@@ -1,20 +1,13 @@
 
-const translations = {
-  EN: {
-    home: "Home",
-    artists: "Artists",
-    artworks: "Artworks",
-    about: "About Us",
-    contact: "Contact",
-  },
+import translations from "./translations";
 
-  KA: {
-    home: "მთავარი",
-    artists: "მხატვრები",
-    artworks: "ნამუშევრები",
-    about: "ჩვენ შესახებ",
-    contact: "კონტაქტი",
-  },
-};
+function useLanguage() {
+  const language = localStorage.getItem("baso-language") || "EN";
 
-export default translations;
+  return {
+    language,
+    t: translations[language] || translations.EN,
+  };
+}
+
+export default useLanguage;

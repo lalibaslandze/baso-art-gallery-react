@@ -1,7 +1,10 @@
 
 import "../styles/contact.css";
+import useLanguage from "../useLanguage";
 
 function ContactPage() {
+  const { t } = useLanguage();
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -31,8 +34,8 @@ function ContactPage() {
 
         <div className="hero-content">
           <div className="container">
-            <h1>Get in touch</h1>
-            <p>We would love to hear from you.</p>
+            <h1>{t.getInTouch}</h1>
+            <p>{t.contactDescription}</p>
           </div>
         </div>
       </section>
@@ -42,19 +45,19 @@ function ContactPage() {
           <div className="contact-layout">
             <div className="contact-information">
               <div className="contact-item">
-                <h3>Call</h3>
-                <a href="tel:593749050">593749050</a>
+                <h3>{t.call}</h3>
+                <a href="tel:+995593749050">+995 593 749 050</a>
               </div>
 
               <div className="contact-item">
-                <h3>Email</h3>
+                <h3>{t.email}</h3>
                 <a href="mailto:l.baslandze@gmail.com">
                   l.baslandze@gmail.com
                 </a>
               </div>
 
               <div className="contact-item">
-                <h3>Social media</h3>
+                <h3>{t.socialMedia}</h3>
                 <a
                   href="https://www.instagram.com/l.baslandze/"
                   target="_blank"
@@ -73,7 +76,7 @@ function ContactPage() {
             </div>
 
             <div className="contact-form-wrapper">
-              <h3>Message us</h3>
+              <h3>{t.messageUs}</h3>
 
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-field">
@@ -81,8 +84,8 @@ function ContactPage() {
                     type="text"
                     id="contact-name"
                     name="name"
-                    placeholder="Name"
-                    aria-label="Name"
+                    placeholder={t.yourName}
+                    aria-label={t.name}
                     required
                   />
                 </div>
@@ -92,8 +95,8 @@ function ContactPage() {
                     type="email"
                     id="contact-email"
                     name="email"
-                    placeholder="Email"
-                    aria-label="Email"
+                    placeholder={t.yourEmail}
+                    aria-label={t.email}
                     required
                   />
                 </div>
@@ -102,15 +105,15 @@ function ContactPage() {
                   <textarea
                     id="contact-message"
                     name="message"
-                    placeholder="Your message..."
-                    aria-label="Message"
+                    placeholder={t.yourMessage}
+                    aria-label={t.yourMessage}
                     rows="5"
                     required
                   />
                 </div>
 
                 <button type="submit" className="btn btn-dark">
-                  Send message
+                  {t.sendMessage}
                 </button>
               </form>
             </div>

@@ -36,6 +36,9 @@ const translations = {
     range500to999: "€500–€999",
     over1000: "€1,000+",
     noArtworks: "No artworks match your selected filters.",
+    addToBasket: "Add to basket",
+    addedToBasket: "Added to basket",
+
 
     // About
     aboutHeroTitle: "About BASO Art Gallery",
@@ -57,6 +60,7 @@ const translations = {
     yourEmail: "Your email",
     yourMessage: "Your message...",
     sendMessage: "Send message",
+
 
     // Footer
     explore: "Explore",
@@ -91,7 +95,7 @@ const translations = {
     // Artworks
     artworksDescription:
       "დაათვალიერეთ ნიჭიერი ხელოვანების თანამედროვე ნამუშევრების შერჩეული კოლექცია.",
-    artist: "ხელოვანი",
+    artist: "ავტორი",
     year: "წელი",
     medium: "ტექნიკა / მასალა",
     size: "ზომა",
@@ -101,6 +105,8 @@ const translations = {
     range500to999: "€500–€999",
     over1000: "€1,000+",
     noArtworks: "თქვენს მიერ არჩეულ ფილტრებს ნამუშევრები არ შეესაბამება.",
+    addToBasket: "კალათაში დამატება",
+    addedToBasket: "დამატებულია კალათაში",
 
     // About
     aboutHeroTitle: "BASO არტ გალერეის შესახებ",
@@ -122,6 +128,8 @@ const translations = {
     yourEmail: "თქვენი ელფოსტა",
     yourMessage: "თქვენი შეტყობინება...",
     sendMessage: "შეტყობინების გაგზავნა",
+
+
 
     // Footer
     explore: "ნავიგაცია",

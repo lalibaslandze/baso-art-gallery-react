@@ -9,6 +9,7 @@ import "./styles/home.css";
 import "./styles/artworks.css";
 import "./styles/artists.css";
 import "./styles/footer.css";
+import "./styles/basket.css";
 import "./styles/responsive.css";
 
 import App from "./App.jsx";

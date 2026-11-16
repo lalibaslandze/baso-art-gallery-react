@@ -1,9 +1,7 @@
 
 import { artists, artworks } from "../data";
-import translations from "../translations";
-
-const language = localStorage.getItem("baso-language") || "EN";
-const t = translations[language] || translations.EN;
+import useLanguage from "../useLanguage";
+import { getLocalizedText } from "../dataTranslations";
 
 function getRandomItems(items, count) {
   return [...items]
@@ -11,7 +9,7 @@ function getRandomItems(items, count) {
     .slice(0, count);
 }
 
-function Hero() {
+function Hero({ t }) {
   return (
     <section className="hero" id="home">
       <div className="hero-media">
@@ -34,7 +32,7 @@ function Hero() {
   );
 }
 
-function FeaturedArtworks() {
+function FeaturedArtworks({ t, language }) {
   const featuredArtworks = getRandomItems(artworks, 4);
 
   return (
@@ -53,6 +51,16 @@ function FeaturedArtworks() {
               (item) => item.id === artwork.artistId
             );
 
+            const title = getLocalizedText(
+              artwork,
+              "title",
+              language
+            );
+
+            const artistName = artist
+              ? getLocalizedText(artist, "name", language)
+              : artwork.artist || "";
+
             return (
               <a
                 href={`/artwork.html?id=${artwork.id}`}
@@ -61,11 +69,11 @@ function FeaturedArtworks() {
               >
                 <img
                   src={artwork.image}
-                  alt={artwork.title}
+                  alt={title}
                   loading="lazy"
                 />
-                <h3>{artwork.title}</h3>
-                <p>{artist?.name || artwork.artist || ""}</p>
+                <h3>{title}</h3>
+                <p>{artistName}</p>
               </a>
             );
           })}
@@ -75,7 +83,7 @@ function FeaturedArtworks() {
   );
 }
 
-function FeaturedArtists() {
+function FeaturedArtists({ t, language }) {
   const featuredArtists = getRandomItems(artists, 2);
 
   return (
@@ -89,36 +97,55 @@ function FeaturedArtists() {
         </div>
 
         <div id="featured-artists-container">
-          {featuredArtists.map((artist) => (
-            <a
-              href={`/artists.html?id=${artist.id}`}
-              className="featured-artist-card"
-              key={artist.id}
-            >
-              {artist.image ? (
-                <>
-                  <img
-                    src={artist.image}
-                    alt={artist.name}
-                    loading="lazy"
-                    onError={(event) => {
-                      event.currentTarget.style.display = "none";
-                      event.currentTarget.nextElementSibling.style.display = "flex";
-                    }}
-                  />
-                  <div className="artist-placeholder" style={{ display: "none" }}>
-                    {artist.name.trim().split(/\s+/).map((part) => part[0]).join("").toUpperCase()}
-                  </div>
-                </>
-              ) : (
-                <div className="artist-placeholder">
-                  {artist.name.trim().split(/\s+/).map((part) => part[0]).join("").toUpperCase()}
-                </div>
-              )}
+          {featuredArtists.map((artist) => {
+            const artistName = getLocalizedText(
+              artist,
+              "name",
+              language
+            );
 
-              <h3>{artist.name}</h3>
-            </a>
-          ))}
+            const initials = artistName
+              .trim()
+              .split(/\s+/)
+              .map((part) => part[0])
+              .join("")
+              .toUpperCase();
+
+            return (
+              <a
+                href={`/artists.html?id=${artist.id}`}
+                className="featured-artist-card"
+                key={artist.id}
+              >
+                {artist.image ? (
+                  <>
+                    <img
+                      src={artist.image}
+                      alt={artistName}
+                      loading="lazy"
+                      onError={(event) => {
+                        event.currentTarget.style.display = "none";
+                        event.currentTarget.nextElementSibling.style.display =
+                          "flex";
+                      }}
+                    />
+                    <div
+                      className="artist-placeholder"
+                      style={{ display: "none" }}
+                    >
+                      {initials}
+                    </div>
+                  </>
+                ) : (
+                  <div className="artist-placeholder">
+                    {initials}
+                  </div>
+                )}
+
+                <h3>{artistName}</h3>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -126,11 +153,13 @@ function FeaturedArtists() {
 }
 
 function Home() {
+  const { t, language } = useLanguage();
+
   return (
     <main>
-      <Hero />
-      <FeaturedArtworks />
-      <FeaturedArtists />
+      <Hero t={t} />
+      <FeaturedArtworks t={t} language={language} />
+      <FeaturedArtists t={t} language={language} />
     </main>
   );
 }

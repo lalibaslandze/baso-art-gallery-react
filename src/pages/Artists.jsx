@@ -1,5 +1,7 @@
 
 import { artists } from "../data";
+import useLanguage from "../useLanguage";
+import { getLocalizedText } from "../dataTranslations";
 
 function ArtistPlaceholder({ name }) {
   const initials = name
@@ -19,14 +21,20 @@ function ArtistPlaceholder({ name }) {
   );
 }
 
-function ArtistCard({ artist }) {
+function ArtistCard({ artist, language }) {
+  const artistName = getLocalizedText(
+    artist,
+    "name",
+    language
+  );
+
   return (
     <article className="artist-card">
       <div className="artist-image-wrapper">
         {artist.image ? (
           <img
             src={artist.image}
-            alt={artist.name}
+            alt={artistName}
             className="artist-portrait"
             loading="lazy"
             onError={(event) => {
@@ -34,16 +42,18 @@ function ArtistCard({ artist }) {
             }}
           />
         ) : (
-          <ArtistPlaceholder name={artist.name} />
+          <ArtistPlaceholder name={artistName} />
         )}
       </div>
 
-      <h2>{artist.name}</h2>
+      <h2>{artistName}</h2>
     </article>
   );
 }
 
 function ArtistsPage() {
+  const { t, language } = useLanguage();
+
   return (
     <main>
       <section className="hero-artworks" id="artists">
@@ -56,12 +66,8 @@ function ArtistsPage() {
 
         <div className="hero-content">
           <div className="container">
-            <h1>Artists</h1>
-
-            <p>
-              Meet the creative minds behind our collection
-              of contemporary artworks.
-            </p>
+            <h1>{t.artists}</h1>
+            <p>{t.artistsDescription}</p>
           </div>
         </div>
       </section>
@@ -69,7 +75,11 @@ function ArtistsPage() {
       <section className="artists-area container">
         <div className="artists-grid">
           {artists.map((artist) => (
-            <ArtistCard artist={artist} key={artist.id} />
+            <ArtistCard
+              artist={artist}
+              language={language}
+              key={artist.id}
+            />
           ))}
         </div>
       </section>

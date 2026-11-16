@@ -1,13 +1,8 @@
 
 import { useState } from "react";
 import { artists, artworks } from "../data";
-
-const priceRanges = [
-  { label: "Under €300", min: 0, max: 299 },
-  { label: "€300–€499", min: 300, max: 499 },
-  { label: "€500–€999", min: 500, max: 999 },
-  { label: "€1,000+", min: 1000, max: Infinity },
-];
+import useLanguage from "../useLanguage";
+import { getLocalizedText } from "../dataTranslations";
 
 function FilterGroup({ title, options, selected, onChange }) {
   return (
@@ -37,7 +32,7 @@ function FilterGroup({ title, options, selected, onChange }) {
   );
 }
 
-function ArtworkCard({ artwork }) {
+function ArtworkCard({ artwork, t, language }) {
   const [isAdded, setIsAdded] = useState(() => {
     try {
       const basket = JSON.parse(
@@ -49,6 +44,17 @@ function ArtworkCard({ artwork }) {
       return false;
     }
   });
+
+  const title = getLocalizedText(artwork, "title", language);
+  const medium = getLocalizedText(artwork, "medium", language);
+
+  const artist = artists.find(
+    (item) => item.id === artwork.artistId
+  );
+
+  const artistName = artist
+    ? getLocalizedText(artist, "name", language)
+    : "";
 
   function addToBasket() {
     try {
@@ -72,6 +78,7 @@ function ArtworkCard({ artwork }) {
         JSON.stringify(updatedBasket)
       );
 
+      window.dispatchEvent(new Event("basketUpdated"));
       setIsAdded(true);
     } catch (error) {
       console.error("Could not add artwork to basket:", error);
@@ -80,13 +87,17 @@ function ArtworkCard({ artwork }) {
 
   return (
     <div className="artwork-card">
-      <img src={artwork.image} alt={artwork.title} loading="lazy" />
-      <h2>{artwork.title}</h2>
+      <img src={artwork.image} alt={title} loading="lazy" />
+
+      <h2>{title}</h2>
+      <p>{artistName}</p>
       <p>{artwork.year}</p>
-      <p>{artwork.medium}</p>
+      <p>{medium}</p>
+
       <p>
         {artwork.width} × {artwork.height} {artwork.unit}
       </p>
+
       <p>
         {artwork.price} {artwork.currency}
       </p>
@@ -97,13 +108,22 @@ function ArtworkCard({ artwork }) {
         onClick={addToBasket}
         disabled={isAdded}
       >
-        {isAdded ? "Added to basket" : "Add to basket"}
+        {isAdded ? t.addedToBasket : t.addToBasket}
       </button>
     </div>
   );
 }
 
 function ArtworksPage() {
+  const { t, language } = useLanguage();
+
+  const priceRanges = [
+    { label: t.under300, min: 0, max: 299 },
+    { label: t.range300to499, min: 300, max: 499 },
+    { label: t.range500to999, min: 500, max: 999 },
+    { label: t.over1000, min: 1000, max: Infinity },
+  ];
+
   const [selectedFilters, setSelectedFilters] = useState({
     artists: [],
     years: [],
@@ -117,7 +137,11 @@ function ArtworksPage() {
   ];
 
   const mediums = [
-    ...new Set(artworks.map((artwork) => artwork.medium)),
+    ...new Set(
+      artworks.map((artwork) =>
+        getLocalizedText(artwork, "medium", language)
+      )
+    ),
   ];
 
   const sizes = [
@@ -152,7 +176,9 @@ function ArtworksPage() {
 
     const mediumMatch =
       selectedFilters.mediums.length === 0 ||
-      selectedFilters.mediums.includes(artwork.medium);
+      selectedFilters.mediums.includes(
+        getLocalizedText(artwork, "medium", language)
+      );
 
     const size = `${artwork.width} × ${artwork.height} ${artwork.unit}`;
 
@@ -201,11 +227,8 @@ function ArtworksPage() {
 
         <div className="hero-content">
           <div className="container">
-            <h1>Artworks</h1>
-            <p>
-              Discover a curated selection of contemporary artworks
-              from talented artists.
-            </p>
+            <h1>{t.artworks}</h1>
+            <p>{t.artworksDescription}</p>
           </div>
         </div>
       </section>
@@ -213,38 +236,38 @@ function ArtworksPage() {
       <div className="gallery-layout">
         <aside className="filters">
           <FilterGroup
-            title="Artist"
+            title={t.artist}
             options={artists.map((artist) => ({
               value: String(artist.id),
-              label: artist.name,
+              label: getLocalizedText(artist, "name", language),
             }))}
             selected={selectedFilters.artists}
             onChange={(value) => toggleFilter("artists", value)}
           />
 
           <FilterGroup
-            title="Year"
+            title={t.year}
             options={years}
             selected={selectedFilters.years}
             onChange={(value) => toggleFilter("years", value)}
           />
 
           <FilterGroup
-            title="Medium"
+            title={t.medium}
             options={mediums}
             selected={selectedFilters.mediums}
             onChange={(value) => toggleFilter("mediums", value)}
           />
 
           <FilterGroup
-            title="Size"
+            title={t.size}
             options={sizes}
             selected={selectedFilters.sizes}
             onChange={(value) => toggleFilter("sizes", value)}
           />
 
           <FilterGroup
-            title="Price"
+            title={t.price}
             options={priceRanges}
             selected={selectedFilters.prices}
             onChange={(value) => toggleFilter("prices", value)}
@@ -258,6 +281,8 @@ function ArtworksPage() {
                 {column.map((artwork) => (
                   <ArtworkCard
                     artwork={artwork}
+                    t={t}
+                    language={language}
                     key={artwork.id}
                   />
                 ))}
@@ -266,9 +291,7 @@ function ArtworksPage() {
           </div>
 
           {filteredArtworks.length === 0 && (
-            <p className="no-artworks">
-              No artworks match your selected filters.
-            </p>
+            <p className="no-artworks">{t.noArtworks}</p>
           )}
         </section>
       </div>
