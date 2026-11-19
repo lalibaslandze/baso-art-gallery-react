@@ -1,7 +1,8 @@
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: '/baso-art-gallery-react/',
-})
+  base: command === 'serve' ? '/' : '/baso-art-gallery-react/',
+}))

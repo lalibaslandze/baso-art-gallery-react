@@ -1,300 +1,517 @@
 
-/* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
+/* =====================================================
+   BASO ART GALLERY
+   RESPONSIVE STYLESHEET
+
+   All responsive rules are kept in this file.
+   Base styles remain in their individual CSS files.
+
+   Breakpoints:
+   900px - Tablet
+   650px - Mobile
+   480px - Small mobile
+   380px - Extra-small mobile
+===================================================== */
 
 
-/* ========================================
-   TABLET: 900px AND BELOW
-   ======================================== */
+/* =====================================================
+   TABLET AND SMALLER SCREENS
+   Maximum width: 900px
+===================================================== */
 
 @media (max-width: 900px) {
 
-  /* HEADER */
+    /* HEADER
+       Related file: header.css */
 
-  .header-inner {
-    grid-template-columns: 1fr auto;
-  }
+    .header-inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "logo actions"
+            "nav nav";
+        grid-template-rows: auto auto;
+        align-items: center;
+    }
 
-  .header-actions {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-  }
+    .logo {
+        grid-area: logo;
+        grid-row: 1;
+    }
 
-  .menu-toggle {
-    display: flex;
-  }
+    .header-actions {
+        grid-area: actions;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        justify-self: end;
+        gap: 6px;
+    }
 
-  .main-nav {
-    display: none;
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-self: stretch;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    width: 100%;
-    padding: 12px 0 18px;
-    border-top: 1px solid var(--line);
-  }
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2003;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
 
-  .main-nav.is-open {
-    display: flex;
-  }
+    .main-nav {
+        grid-area: nav;
+        grid-row: 2;
+        grid-column: 1 / -1;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        justify-self: stretch;
+        gap: 0;
+        width: 100%;
+        padding: 12px 0 18px;
+        border-top: 1px solid var(--line);
+        background: #f7f5f0;
+    }
 
-  .main-nav a {
-    display: block;
-    padding: 12px 0;
-    line-height: 1.4;
-  }
+    .main-nav.is-open {
+        display: flex;
+    }
 
-
-  /* FOOTER */
-
-  .footer-inner {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-
-  /* ARTWORKS */
-
-  .gallery-layout {
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 24px;
-  }
-
-  #artworks-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-
-  /* HOME PAGE */
-
-  #featured-artworks-container,
-  .featured-artworks-grid,
-  #featured-artists-container,
-  .featured-artists-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    .main-nav a {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        line-height: 1.4;
+    }
 
 
-  /* ARTISTS */
+    /* HOME PAGE
+       Related file: home.css */
 
-  .artists-grid,
-  #artists-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    #featured-artworks-container,
+    #featured-artists-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* ARTWORKS PAGE
+       Related file: artworks.css */
+
+    .gallery-layout {
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    #artworks-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* ARTISTS PAGE
+       Related file: artists.css */
+
+    .artists-grid,
+    #artists-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* CONTACT PAGE
+       Related file: contact.css */
+
+    .contact-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+
+    /* BASKET PAGE
+       Related file: basket.css */
+
+    .basket-content {
+        padding-top: 35px;
+        padding-bottom: 70px;
+    }
+
+    .basket-invoice {
+        max-width: 100%;
+    }
+
+    .basket-item {
+        gap: 14px;
+    }
+
+    .basket-item-price {
+        min-width: 90px;
+    }
+
+
+    /* FOOTER
+       Related file: footer.css */
+
+    .footer-inner {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 
-/* ========================================
-   MOBILE: 650px AND BELOW
-   ======================================== */
+/* =====================================================
+   MOBILE SCREENS
+   Maximum width: 650px
+===================================================== */
 
 @media (max-width: 650px) {
 
-  :root {
-    --page-padding: 16px;
-    --gap: 16px;
-  }
+    /* GLOBAL
+       Related file: variables.css */
+
+    :root {
+        --page-padding: 16px;
+        --gap: 16px;
+    }
 
 
-  /* HERO */
+    /* HEADER
+       Related file: header.css */
 
-  .hero {
-    height: calc(100svh - var(--header-height));
-  }
+    .header-inner {
+        padding-inline: var(--page-padding);
+    }
 
-  .hero-artworks,
-  .hero-about {
-    height: calc((100svh - var(--header-height)) / 2);
-  }
+    .logo img {
+        width: 120px;
+    }
 
-  .hero-content {
-    padding-inline: var(--page-padding);
-  }
+    .header-actions {
+        gap: 5px;
+    }
 
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+    }
 
-  /* ARTWORKS */
+    .icon-btn img {
+        width: 26px;
+        height: 26px;
+    }
 
-  .gallery-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-    margin-block: 24px;
-  }
+    .menu-toggle {
+        display: flex;
+    }
 
-  .filters {
-    padding: 0 0 20px;
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .filter-group {
-    margin-top: 20px;
-  }
-
-  #artworks-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .artworks-column {
-    gap: 20px;
-  }
+    .main-nav {
+        padding: 12px 0 18px;
+    }
 
 
-  /* HOME PAGE */
+    /* HOME PAGE
+       Related file: home.css */
 
-  .featured-artworks .section-header,
-  .featured-artists .section-header {
-    margin-bottom: 24px;
-  }
+    .featured-artworks .section-header,
+    .featured-artists .section-header {
+        margin-bottom: 24px;
+    }
 
-  #featured-artworks-container,
-  .featured-artworks-grid,
-  #featured-artists-container,
-  .featured-artists-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-
-  /* ARTISTS */
-
-  .artists-area {
-    margin-block: 24px;
-    padding-bottom: 40px;
-  }
-
-  .artists-grid,
-  #artists-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    #featured-artworks-container,
+    #featured-artists-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
 
-  /* CONTACT PAGE */
+    /* ARTWORKS PAGE
+       Related file: artworks.css */
 
-  .contact-section {
-    padding-block: 55px;
-  }
+    .gallery-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        margin-block: 24px;
+    }
 
-  .contact-layout {
-    grid-template-columns: 1fr;
-    row-gap: 55px;
-    width: 100%;
-    max-width: 600px;
-    margin-inline: auto;
-  }
+    .filters {
+        padding: 0 0 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
 
-  .contact-information {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px;
-  }
+    .filter-group {
+        margin-top: 20px;
+    }
 
-  .contact-item:last-child {
-    grid-column: 1 / -1;
-  }
+    #artworks-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
 
-  .contact-form-wrapper {
-    width: 100%;
-  }
-
-  .contact-form-wrapper h2 {
-    margin-bottom: 28px;
-  }
-
-  .contact-form {
-    width: 100%;
-  }
+    .artworks-column {
+        gap: 20px;
+    }
 
 
-  /* FOOTER */
+    /* ARTISTS PAGE
+       Related file: artists.css */
 
-  .footer-inner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 30px;
-  }
+    .artists-area {
+        margin-block: 24px;
+        padding-bottom: 40px;
+    }
+
+    .artists-grid,
+    #artists-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .artist-card {
+        padding: 14px;
+        gap: 12px;
+    }
+
+
+    /* CONTACT PAGE
+       Related file: contact.css */
+
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+
+    /* BASKET PAGE
+       Related file: basket.css */
+
+    .basket-content {
+        padding-top: 25px;
+        padding-bottom: 50px;
+    }
+
+    .basket-empty {
+        padding: 40px 16px;
+    }
+
+    .basket-item {
+        gap: 12px;
+        padding: 14px 6px;
+    }
+
+    .basket-artwork {
+        gap: 12px;
+    }
+
+    .basket-item-image {
+        width: 52px !important;
+        height: 52px !important;
+    }
+
+    .basket-item-price {
+        min-width: 75px;
+        font-size: 14px;
+    }
+
+    .basket-summary {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .basket-actions {
+        flex-wrap: wrap;
+    }
+
+    .basket-actions .btn {
+        flex: 1 1 100%;
+    }
+
+
+    /* FOOTER
+       Related file: footer.css */
+
+    .footer-inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 
 
-/* ========================================
-   SMALL MOBILE: 480px AND BELOW
-   ======================================== */
+/* =====================================================
+   SMALL MOBILE SCREENS
+   Maximum width: 480px
+===================================================== */
 
 @media (max-width: 480px) {
 
+    /* HEADER
+       Related file: header.css */
 
-  /* ARTISTS */
+    .logo img {
+        width: 110px;
+    }
 
-  .artists-grid,
-  #artists-container {
-    grid-template-columns: minmax(0, 1fr);
-  }
+    .header-actions {
+        gap: 3px;
+    }
+
+    .account-dropdown {
+        width: min(300px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+    }
+
+    .language-dropdown {
+        min-width: 135px;
+    }
 
 
-  /* HERO TEXT */
+    /* HOME PAGE
+       Related file: home.css */
 
-  .hero-content h1 {
-    font-size: clamp(1.8rem, 8vw, 2.4rem);
-  }
+    .featured-artworks .section-header,
+    .featured-artists .section-header {
+        gap: 12px;
+    }
 
 
-  /* CONTACT PAGE */
+    /* BASKET PAGE
+       Related file: basket.css */
 
-  .contact-section {
-    padding-block: 45px;
-  }
+    .basket-table-heading {
+        gap: 10px;
+    }
 
-  .contact-layout {
-    row-gap: 45px;
-  }
+    .basket-item-info h2 {
+        font-size: 14px;
+    }
 
-  .contact-information {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+    .basket-item-info p {
+        font-size: 12px;
+    }
 
-  .contact-item:last-child {
-    grid-column: auto;
-  }
-
-  .contact-form {
-    gap: 24px;
-  }
-
-  .contact-form .btn {
-    width: 100%;
-  }
+    .basket-grand-total {
+        font-size: 18px;
+    }
 }
 
 
-/* ========================================
-   EXTRA SMALL: 380px AND BELOW
-   ======================================== */
+/* =====================================================
+   EXTRA-SMALL MOBILE SCREENS
+   Maximum width: 380px
+===================================================== */
 
 @media (max-width: 380px) {
 
-  #artworks-container,
-  #featured-artworks-container,
-  .featured-artworks-grid,
-  #featured-artists-container,
-  .featured-artists-grid,
-  .artists-grid,
-  #artists-container {
-    grid-template-columns: minmax(0, 1fr);
-  }
+    /* HEADER
+       Related file: header.css */
 
-  .featured-artworks .section-header,
-  .featured-artists .section-header {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
+    .logo img {
+        width: 95px;
+    }
 
-  .featured-artworks .view-all,
-  .featured-artists .view-all,
-  .featured-artworks .view-all-link,
-  .featured-artists .view-all-link {
-    margin-left: 0;
-  }
+    .header-actions {
+        gap: 2px;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .icon-btn img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .account-dropdown {
+        width: min(280px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+    }
+
+    .language-dropdown {
+        min-width: 125px;
+    }
+
+
+    /* HOME PAGE
+       Related file: home.css */
+
+    #featured-artworks-container,
+    #featured-artists-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .featured-artworks .section-header,
+    .featured-artists .section-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .featured-artworks .view-all,
+    .featured-artists .view-all {
+        margin-left: 0;
+    }
+
+
+    /* ARTWORKS PAGE
+       Related file: artworks.css */
+
+    #artworks-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+
+    /* ARTISTS PAGE
+       Related file: artists.css */
+
+    .artists-grid,
+    #artists-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+
+    /* BASKET PAGE
+       Related file: basket.css */
+
+    .basket-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .basket-artwork {
+        flex: 1 1 100%;
+    }
+
+    .basket-item-price {
+        margin-left: 64px;
+        text-align: left;
+    }
+
+    .basket-item-info h2 {
+        font-size: 14px;
+    }
+
+    .basket-item-image {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .basket-grand-total {
+        font-size: 17px;
+    }
+
+/* ACCOUNT DROPDOWN
+   Related file: header.css */
+
+.account-area {
+    position: relative;
+}
+
+.account-dropdown {
+    position: fixed;
+    top: calc(var(--header-height) + 8px);
+    right: 8px;
+    left: 8px;
+    width: auto;
+    max-width: 304px;
+    max-height: calc(100vh - var(--header-height) - 24px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 3000;
+    margin-left: auto;
+}
+
 }
