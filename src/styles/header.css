@@ -96,7 +96,7 @@
     display: none;
 }
 
-/* ACCOUNT AND LANGUAGE POPUPS */
+/* ACCOUNT AND LANGUAGE */
 
 .account-area,
 .language-selector {
@@ -105,21 +105,7 @@
     align-items: center;
 }
 
-.account-dropdown {
-    position: absolute;
-    top: calc(100% + 12px);
-    right: 0;
-    left: auto;
-    z-index: 2001;
-    width: 320px;
-    max-width: calc(100vw - 32px);
-    background: #f7f5f0;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
-}
-
-/* LANGUAGE SELECTOR */
-
-/* Globe icon without a border, outline or background. */
+/* LANGUAGE BUTTON */
 
 .language-toggle {
     width: 44px;
@@ -152,6 +138,14 @@
     outline: none;
     background: transparent;
     box-shadow: none;
+}
+
+.language-toggle span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    line-height: 1;
 }
 
 .language-toggle svg {
@@ -253,7 +247,7 @@
         line-height: 1.4;
     }
 
-    /* Consistent header icon sizing on mobile. */
+    /* HEADER ICONS */
 
     .icon-btn {
         width: 44px;
@@ -270,7 +264,7 @@
         object-fit: contain;
     }
 
-    /* Keep the globe icon without any outline on mobile. */
+    /* LANGUAGE BUTTON */
 
     .language-toggle {
         width: 44px;
@@ -290,6 +284,10 @@
         outline: none;
         background: transparent;
         box-shadow: none;
+    }
+
+    .language-toggle span {
+        font-size: 26px;
     }
 
     .language-toggle svg {

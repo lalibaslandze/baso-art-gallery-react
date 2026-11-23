@@ -1,0 +1,245 @@
+
+/* =========================================
+   ACCOUNT MODAL
+   BASO ART GALLERY
+========================================= */
+
+.account-modal-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(28, 27, 25, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    animation: accountFadeIn 0.25s ease;
+}
+
+.account-modal {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: calc(100dvh - 40px);
+    margin: auto;
+    overflow-y: auto;
+
+    padding: 42px 44px 30px;
+
+    background: var(--cream);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
+
+    animation: accountModalIn 0.3s ease;
+}
+
+/* CLOSE BUTTON */
+
+.account-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 30px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.account-modal-close:hover {
+    color: var(--clay);
+}
+
+/* CONTENT */
+
+.account-modal-content {
+    width: 100%;
+}
+
+.account-modal-content h2 {
+    margin: 0 0 26px;
+    color: var(--ink);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* FORM */
+
+.account-modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.account-modal-content label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
+
+.account-modal-content input {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 13px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    outline: none;
+    background: var(--card-background);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s ease;
+}
+
+.account-modal-content input:focus {
+    border-color: var(--gold);
+}
+
+.account-modal-content input::placeholder {
+    color: #9b958b;
+}
+
+/* SUBMIT BUTTON */
+
+.account-modal-submit {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 8px;
+    padding: 12px 18px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.account-modal-submit:hover {
+    border-color: var(--clay);
+    background: var(--clay);
+}
+
+/* SIGN IN / REGISTER SWITCH */
+
+.account-modal-switch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: 24px 0 0;
+    color: var(--ink-soft);
+    font-size: 12px;
+    text-align: center;
+}
+
+.account-modal-switch button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--clay);
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.account-modal-switch button:hover {
+    color: var(--ink);
+}
+
+/* ERROR MESSAGE */
+
+.account-modal-message {
+    margin: 18px 0 0;
+    color: #a13e32;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* PROFILE */
+
+.account-profile-details {
+    margin: 28px 0;
+    padding: 22px 12px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+}
+
+.account-profile-details h3 {
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.account-profile-details p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+}
+
+/* ANIMATIONS */
+
+@keyframes accountFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes accountModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+    .account-modal-overlay {
+        padding: 16px;
+    }
+
+    .account-modal {
+        max-width: 100%;
+        max-height: calc(100dvh - 32px);
+        padding: 38px 24px 24px;
+    }
+
+    .account-modal-content h2 {
+        font-size: 26px;
+    }
+}
